@@ -1,6 +1,5 @@
 package com.mz_dev.prueba_tecnica.ui.view.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,13 +28,14 @@ fun OpenCharacterDialog(character: Character, onClose: () -> Unit) {
             .clickable { onClose() },
         contentAlignment = Alignment.Center,
     ) {
-        Box(
+        Card(
             modifier = Modifier
-                .padding(30.dp)
-                .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(10.dp)
-            )
+                .padding(30.dp),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            elevation = CardDefaults.cardElevation(4.dp)
         ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp),

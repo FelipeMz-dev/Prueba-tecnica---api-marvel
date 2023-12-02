@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.mz_dev.prueba_tecnica.data.model.Character
-import com.mz_dev.prueba_tecnica.ui.view.component.CharacterItem
+import com.mz_dev.prueba_tecnica.ui.view.component.card.CharacterCard
 
 @Composable
 fun CharacterFragment(
@@ -23,7 +23,7 @@ fun CharacterFragment(
         contentPadding = PaddingValues(5.dp)
     ) {
         items(characters) {
-            CharacterItem(
+            CharacterCard(
                 item = it,
                 onClickItem = { onOpenCharacter(it) },
                 onClickFavorite = { onChangeFavorite(it) }

@@ -1,7 +1,7 @@
 package com.mz_dev.prueba_tecnica.data.mapper
 
 import com.mz_dev.prueba_tecnica.data.model.Character
-import com.mz_dev.prueba_tecnica.data.remote.characterResult.RemoteCharacter
+import com.mz_dev.prueba_tecnica.data.remote.characterresult.RemoteCharacter
 
 class RemoteToCharacterMapper {
     fun map(remoteCharacter: RemoteCharacter) = Character(

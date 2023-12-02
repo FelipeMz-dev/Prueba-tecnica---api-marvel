@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.mz_dev.prueba_tecnica.data.local.MarvelDao
 import com.mz_dev.prueba_tecnica.data.local.MarvelDatabase
-import com.mz_dev.prueba_tecnica.data.remote.MarvelService
+import com.mz_dev.prueba_tecnica.data.remote.service.CharacterService
+import com.mz_dev.prueba_tecnica.data.remote.service.SerieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,8 +31,14 @@ object RemoteModule {
 
     @Singleton
     @Provides
-    fun provideMarelApiService(retrofit: Retrofit): MarvelService = retrofit.create(
-        MarvelService::class.java
+    fun provideCharacterMarvelApiService(retrofit: Retrofit): CharacterService = retrofit.create(
+        CharacterService::class.java
+    )
+
+    @Singleton
+    @Provides
+    fun provideSerieMarvelApiService(retrofit: Retrofit): SerieService = retrofit.create(
+        SerieService::class.java
     )
 
     //Room inject
