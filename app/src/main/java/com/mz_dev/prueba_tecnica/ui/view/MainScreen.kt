@@ -44,8 +44,8 @@ fun MainScreen(viewModel: MainViewModel) {
                 if (state.loading) {
                     LoadingScreen()
                 } else {
-                    if (state.sectionSelected == MainViewModel.TAG_CHARACTER && state.characters.isEmpty()
-                        || state.sectionSelected == MainViewModel.TAG_SERIES && state.series.isEmpty()
+                    if (state.sectionSelected == MainViewModel.TAG_CHARACTER && state.filteredCharacter.isEmpty()
+                        || state.sectionSelected == MainViewModel.TAG_SERIES && state.filteredSeries.isEmpty()
                     ) {
                         TextNotResultsFound()
                     } else {

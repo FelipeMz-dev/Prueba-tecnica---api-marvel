@@ -159,7 +159,7 @@ class MainViewModel @Inject constructor(
     }
 
     data class UiState(
-        val loading: Boolean = false,
+        val loading: Boolean = true,
         val characters: List<Character> = emptyList(),
         val series: List<Serie> = emptyList(),
         val openCharacter: Character? = null,

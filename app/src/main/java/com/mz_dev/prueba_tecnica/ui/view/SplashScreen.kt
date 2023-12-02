@@ -16,12 +16,11 @@ import com.mz_dev.prueba_tecnica.ui.viewmodel.MainViewModel
 @Composable
 fun SplashScreen(navController: NavHostController, viewModel: MainViewModel) {
     val state by viewModel.uiState.collectAsState()
-    if (state.loading) {
+    if (!state.loading) {
         LaunchedEffect(key1 = true) {
             navController.popBackStack()
             navController.navigate(AppScreens.MainScreen.route)
         }
     }
-    Spacer(modifier = Modifier.size(10.dp))
     Splash()
 }

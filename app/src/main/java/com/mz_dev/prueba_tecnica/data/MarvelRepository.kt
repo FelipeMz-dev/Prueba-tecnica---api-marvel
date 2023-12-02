@@ -9,7 +9,6 @@ import com.mz_dev.prueba_tecnica.data.model.Serie
 import com.mz_dev.prueba_tecnica.data.remote.datasource.RemoteCharacterDataSource
 import com.mz_dev.prueba_tecnica.data.remote.datasource.RemoteSerieDataSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -33,15 +32,16 @@ class MarvelRepository @Inject constructor(
 
     suspend fun loadSeries(quantity: Int) {
         val isDbEmpty = localSeriesDataSource.countSeries() == 0
-        println("-----------------------------------------------------")
-        println("count series: ${localSeriesDataSource.countSeries()}")
         if (isDbEmpty) {
             val series = mutableListOf<Serie>()
             var offset = 0
-            val limit = 20
+            var limit = 20
             while (offset < quantity) {
-                series.addAll(remoteSerieSource.getSeries(limit, offset))
-                offset += if (offset + limit < quantity) limit else quantity - offset
+                remoteSerieSource.getSeries(limit, offset).let { newSeries ->
+                    series.addAll(newSeries)
+                }
+                offset += limit
+                if (limit + offset > quantity) limit = quantity - offset
             }
             localSeriesDataSource.insertAll(series)
         }
@@ -52,10 +52,13 @@ class MarvelRepository @Inject constructor(
         if (isDbEmpty) {
             val characters = mutableListOf<Character>()
             var offset = 0
-            val limit = 20
+            var limit = 20
             while (offset < quantity) {
-                characters.addAll(remoteCharacterSource.getCharacters(limit, offset + 74))
-                offset += if (offset + limit < quantity) limit else quantity - offset
+                remoteCharacterSource.getCharacters(limit, offset + 74).let { newCharacters ->
+                    characters.addAll(newCharacters)
+                }
+                offset += limit
+                if (limit + offset > quantity) limit = quantity - offset
             }
             localDataSource.insertAll(characters)
         }

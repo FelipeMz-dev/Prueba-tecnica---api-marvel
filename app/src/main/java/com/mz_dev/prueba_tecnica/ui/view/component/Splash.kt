@@ -3,6 +3,7 @@ package com.mz_dev.prueba_tecnica.ui.view.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
@@ -31,6 +32,15 @@ fun Splash() {
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
         )
+        Spacer(modifier = Modifier.size(10.dp))
+        Text(
+            text = "Loading data...",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onPrimary,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+        )
+        Spacer(modifier = Modifier.size(10.dp))
         CircularProgressIndicator(
             modifier = Modifier.size(100.dp),
             color = MaterialTheme.colorScheme.onPrimary

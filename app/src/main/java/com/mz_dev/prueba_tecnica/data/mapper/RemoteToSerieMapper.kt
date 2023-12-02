@@ -7,7 +7,7 @@ class RemoteToSerieMapper {
     fun map(remoteSerie: SerieResult) = Serie(
         id = 0,
         title = remoteSerie.title,
-        description = "",
+        description = remoteSerie.description.let { if (it is String) it else "" },
         thumbnail =
         "${remoteSerie.thumbnail.path}.${remoteSerie.thumbnail.extension}"
     )

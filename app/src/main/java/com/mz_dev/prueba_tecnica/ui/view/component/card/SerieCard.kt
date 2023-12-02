@@ -35,46 +35,48 @@ fun SerieCard(serie: Serie) {
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
-        Row {
-            val isLoadedImage = remember { mutableStateOf(false) }
-            Box {
-                AsyncImage(
-                    model = serie.thumbnail,
-                    contentDescription = "Serie Image",
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .height(100.dp)
-                        .aspectRatio(1f),
-                    contentScale = androidx.compose.ui.layout.ContentScale.Crop,
-                    error = painterResource(id = R.drawable.baseline_warning_24),
-                    onLoading = { isLoadedImage.value = false },
-                    onSuccess = { isLoadedImage.value = true }
-                )
-                if (!isLoadedImage.value) CircularProgressIndicator(
-                    modifier = Modifier
-                        .size(100.dp)
-                        .align(Alignment.Center)
-                        .aspectRatio(1f)
-                )
-            }
-            Column {
+        Column {
+            Row {
+                val isLoadedImage = remember { mutableStateOf(false) }
+                Box {
+                    AsyncImage(
+                        model = serie.thumbnail,
+                        contentDescription = "Serie Image",
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .height(100.dp)
+                            .aspectRatio(1f),
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                        error = painterResource(id = R.drawable.baseline_warning_24),
+                        onLoading = { isLoadedImage.value = false },
+                        onSuccess = { isLoadedImage.value = true }
+                    )
+                    if (!isLoadedImage.value) CircularProgressIndicator(
+                        modifier = Modifier
+                            .size(100.dp)
+                            .align(Alignment.Center)
+                            .aspectRatio(1f)
+                    )
+                }
+
                 Text(
                     text = serie.title,
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxWidth(),
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(
-                    text = serie.description.trim(),
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .fillMaxWidth(),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+
             }
+            Text(
+                text = serie.description.trim(),
+                modifier = Modifier
+                    .padding(4.dp)
+                    .fillMaxWidth(),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
         }
     }
 }
