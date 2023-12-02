@@ -1,6 +1,5 @@
 package com.mz_dev.prueba_tecnica.data
 
-import com.mz_dev.prueba_tecnica.data.local.LocalCharacter
 import com.mz_dev.prueba_tecnica.data.local.LocalDataSource
 import com.mz_dev.prueba_tecnica.data.mapper.LocalToCharacterMapper
 import com.mz_dev.prueba_tecnica.data.model.Character
@@ -21,10 +20,17 @@ class MarvelRepository @Inject constructor(
         localDataSource.updateCharacter(character)
     }
 
-    suspend fun loadCharacters(limit: Int) {
+    suspend fun loadCharacters(quantity: Int) {
         val isDbEmpty = localDataSource.countCharacters() == 0
         if (isDbEmpty) {
-            localDataSource.insertAll(remoteDataSource.getCharacters(limit))
+            val characters = mutableListOf<Character>()
+            var offset = 0
+            val limit = 20
+            while (offset < quantity -limit) {
+                characters.addAll(remoteDataSource.getCharacters(limit, offset+74))
+                offset += if (offset + limit < quantity) limit else quantity - offset
+            }
+            localDataSource.insertAll(characters)
         }
     }
 }

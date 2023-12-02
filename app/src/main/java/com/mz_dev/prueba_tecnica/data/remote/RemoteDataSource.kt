@@ -11,9 +11,10 @@ class RemoteDataSource @Inject constructor(
     private val apiKey = auth.getPublicApiKey()
     private val timestamp = auth.generateTimestamp()
     private val hash = auth.generateHash(timestamp)
+    private val orderBy = "-modified"
 
-    suspend fun getCharacters(limit: Int) = apiService
-        .getCharacters(apiKey, timestamp, hash, limit)
+    suspend fun getCharacters(limit: Int, offset: Int) = apiService
+        .getCharacters(apiKey, timestamp, hash, orderBy,limit, offset)
         .data
         .results
         .map { RemoteToCharacterMapper().map(it) }

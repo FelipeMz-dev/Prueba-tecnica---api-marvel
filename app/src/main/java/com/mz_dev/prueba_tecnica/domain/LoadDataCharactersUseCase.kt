@@ -6,8 +6,8 @@ import javax.inject.Inject
 class LoadDataCharactersUseCase @Inject constructor(
     private val repository: MarvelRepository
 ) {
-    suspend operator fun invoke(limit: Int) {
-        repository.loadCharacters(limit)
+    suspend operator fun invoke(quantity: Int) {
+        repository.loadCharacters(quantity)
     }
 
 }

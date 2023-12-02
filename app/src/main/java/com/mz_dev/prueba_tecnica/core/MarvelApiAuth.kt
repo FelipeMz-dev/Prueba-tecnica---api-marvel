@@ -8,8 +8,11 @@ import java.util.Locale
 import java.util.TimeZone
 
 class MarvelApiAuth {
-    private val publicKey = "24487a97e5270272301c01d3f8f2e112"
-    private val privateKey = "91a5bfa3f5131cbd30e5587f7200ca67ef8e863a"
+    companion object{
+        private const val publicKey = "24487a97e5270272301c01d3f8f2e112"
+        private const val privateKey = "91a5bfa3f5131cbd30e5587f7200ca67ef8e863a"
+    }
+
 
     fun generateTimestamp(): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
@@ -42,6 +45,6 @@ class MarvelApiAuth {
     }
 
     fun getPublicApiKey(): String{
-        return this.publicKey
+        return publicKey
     }
 }

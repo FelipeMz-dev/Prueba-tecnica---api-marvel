@@ -10,6 +10,8 @@ interface MarvelService {
         @Query("apikey") apiKey: String,
         @Query("ts") timestamp: String,
         @Query("hash") hash: String,
-        @Query("limit") limit: Int
+        @Query("orderBy") orderBy: String,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
     ): CharacterResult
 }
